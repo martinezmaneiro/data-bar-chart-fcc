@@ -4,8 +4,20 @@ let req = new XMLHttpRequest();
 let data;
 let values = [];
 
-let wScale;
+/*graph x and y scales*/
 let hScale;
+let wScale;
+
+let generateScales =()=>{
+    hScale = d3.scaleLinear()
+                .domain([0, d3.max(values, (item) =>{
+                    return item[1]
+                })])
+                .range([0, height - (padding*2)]);
+    wScale = d3.scaleLinear()
+                .domain([0, values.length -1])
+                .range([padding, width - padding]);
+};
 
 let xAxisScale;
 let yAxisScale;
@@ -21,7 +33,7 @@ let drawCanvas =()=> {
     svg.attr('height', height);
 };
 
-let generateScales =()=>{};
+
 
 let drawBars =()=>{};
 
