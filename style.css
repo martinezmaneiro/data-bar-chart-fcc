@@ -8,3 +8,7 @@ body {
 svg {
     background-color: whitesmoke;
 }
+
+#title {
+    text-align: center;
+}
