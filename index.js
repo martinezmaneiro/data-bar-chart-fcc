@@ -4,11 +4,16 @@ let req = new XMLHttpRequest();
 let data;
 let values = [];
 
-/*graph x and y scales*/
+let width = 800;
+let height = 600;
+let padding = 40;
+
 let hScale;
 let wScale;
-
+let xAxisScale;
+let yAxisScale;
 let generateScales =()=>{
+    /*graph x and y scales for bars*/
     hScale = d3.scaleLinear()
                 .domain([0, d3.max(values, (item) =>{
                     return item[1]
@@ -17,14 +22,24 @@ let generateScales =()=>{
     wScale = d3.scaleLinear()
                 .domain([0, values.length -1])
                 .range([padding, width - padding]);
+    /*date string converter into numerical dates*/
+    let datesArray = values.map((item) => {
+        return new Date(item[0])
+    });
+    /*scale for x axis (numerical dates)*/
+    xAxisScale = d3.scaleTime()
+                        .domain([d3.min(datesArray), d3.max(datesArray)])
+                        .range([padding, width - padding]);
+    /*scale for y axis (GDP)*/
+    yAxisScale = d3.scaleLinear()
+                        .domain(0, d3.max(values, (item) => {
+                            return item[1]
+                        }))
+                        .range([height - padding, padding]);
 };
 
-let xAxisScale;
-let yAxisScale;
 
-let width = 800;
-let height = 600;
-let padding = 40;
+
 
 let svg = d3.select('svg');
 
@@ -36,6 +51,15 @@ let drawCanvas =()=> {
 
 
 let drawBars =()=>{};
+
+let generateAxes =()=>{
+    let xAxis = d3.axisBottom(xAxisScale)
+
+    svg.append('g')
+        .call(xAxis)
+        .attr('id', 'x-axis')
+        .attr('transform', 'translate(0, ' + (height-padding) + ')');
+}
 
 /*use the open method to set the XMLHttpRequest. The first argument is the 'GET' method
 as we are fetching info from an url (which is the second argument). The third argument
