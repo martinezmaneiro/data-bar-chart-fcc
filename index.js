@@ -52,7 +52,10 @@ let drawBars =()=>{
         .enter()
         .append('rect')
         .attr('class', 'bar')
-        .attr('width', (width - (2*padding)) / values.length);
+        .attr('width', (width - (2*padding)) / values.length)
+        .attr('data-date', (item) => {return item[0]})
+        .attr('data-gdp', (item) => {return item[1]})
+        .attr('height', (item) => {return hScale(item[1])});
 };
 
 /*x and y axes*/
