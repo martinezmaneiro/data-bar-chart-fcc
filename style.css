@@ -1,4 +1,5 @@
 body {
+    background-color: rgb(172, 208, 231);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,9 +7,15 @@ body {
 }
 
 svg {
+    margin-top: 25vh;
     background-color: whitesmoke;
+    border-radius: 10px;
 }
 
 #title {
     text-align: center;
+}
+
+.bar:hover {
+    fill: cadetblue;
 }
