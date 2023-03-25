@@ -44,9 +44,24 @@ let drawCanvas =()=> {
     svg.attr('width', width);
     svg.attr('height', height);
 };
-/*function to create a bar for every value and to set their width
-acoording to the scales*/
+/*
+# function to create a bar for every value and to set their width
+acoording to the scales.
+# added tooltip with hover effect that triggers display*/
 let drawBars =()=>{
+
+    let tooltip = d3.select('body')
+                    .append('div')
+                    .attr('id', 'tooltip')
+                    .style('visibility', 'hidden')
+                    .style('width', 'auto')
+                    .style('height', 'auto')
+                    .on('mouseover', (item) => {tooltip.transition()
+                                                        .style('visibility','visible')
+                                                tooltip.text(item[0])})
+                    .on('mouseout', (item) => {tooltip.transition()
+                                                        .style('visibility', 'hidden')})
+
     svg.selectAll('rect')
         .data(values)
         .enter()
