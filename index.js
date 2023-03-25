@@ -56,7 +56,9 @@ let drawBars =()=>{
         .attr('data-date', (item) => {return item[0]})
         .attr('data-gdp', (item) => {return item[1]})
         .attr('height', (item) => {return hScale(item[1])})
-        .attr('x', (item, index) => {return wScale(index)});
+        .attr('x', (item, index) => {return wScale(index)})
+        .attr('y', (item) => {return (height - padding) - hScale(item[1])})
+        ;
 };
 
 /*x and y axes*/
