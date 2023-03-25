@@ -56,11 +56,6 @@ let drawBars =()=>{
                     .style('visibility', 'hidden')
                     .style('width', 'auto')
                     .style('height', 'auto')
-                    .on('mouseover', (item) => {tooltip.transition()
-                                                        .style('visibility','visible')
-                                                tooltip.text(item[0])})
-                    .on('mouseout', (item) => {tooltip.transition()
-                                                        .style('visibility', 'hidden')})
 
     svg.selectAll('rect')
         .data(values)
@@ -73,7 +68,12 @@ let drawBars =()=>{
         .attr('height', (item) => {return hScale(item[1])})
         .attr('x', (item, index) => {return wScale(index)})
         .attr('y', (item) => {return (height - padding) - hScale(item[1])})
-        ;
+        .on('mouseover', (e, item) => {tooltip.transition()
+                                            .style('visibility','visible')
+                                    tooltip.text(item[0])
+                                    document.querySelector('#tooltip').setAttribute('data-date', item[0])})
+        .on('mouseout', (item) => {tooltip.transition()
+                                            .style('visibility', 'hidden')});
 };
 
 /*x and y axes*/
