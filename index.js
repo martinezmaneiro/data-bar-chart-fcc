@@ -44,8 +44,17 @@ let drawCanvas =()=> {
     svg.attr('width', width);
     svg.attr('height', height);
 };
+/*function to create a bar for every value and to set their width
+acoording to the scales*/
+let drawBars =()=>{
+    svg.selectAll('rect')
+        .data(values)
+        .enter()
+        .append('rect')
+        .attr('class', 'bar')
+        .attr('width', (width - (2*padding)) / values.length);
+};
 
-let drawBars =()=>{};
 /*x and y axes*/
 let generateAxes =()=>{
     let xAxis = d3.axisBottom(xAxisScale);
