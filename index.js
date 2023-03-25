@@ -32,14 +32,11 @@ let generateScales =()=>{
                         .range([padding, width - padding]);
     /*scale for y axis (GDP)*/
     yAxisScale = d3.scaleLinear()
-                        .domain(0, d3.max(values, (item) => {
+                        .domain([0, d3.max(values, (item) => {
                             return item[1]
-                        }))
+                        })])
                         .range([height - padding, padding]);
 };
-
-
-
 
 let svg = d3.select('svg');
 
@@ -48,17 +45,21 @@ let drawCanvas =()=> {
     svg.attr('height', height);
 };
 
-
-
 let drawBars =()=>{};
-
+/*x and y axes*/
 let generateAxes =()=>{
-    let xAxis = d3.axisBottom(xAxisScale)
+    let xAxis = d3.axisBottom(xAxisScale);
+    let yAxis = d3.axisLeft(yAxisScale);
 
     svg.append('g')
         .call(xAxis)
         .attr('id', 'x-axis')
         .attr('transform', 'translate(0, ' + (height-padding) + ')');
+
+    svg.append('g')
+        .call(yAxis)
+        .attr('id', 'y-axis')
+        .attr('transform', 'translate(' + padding + ', 0)');
 }
 
 /*use the open method to set the XMLHttpRequest. The first argument is the 'GET' method
