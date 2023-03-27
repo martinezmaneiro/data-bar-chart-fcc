@@ -37,9 +37,9 @@ let generateScales =()=>{
                         })])
                         .range([height - padding, padding]);
 };
-
+/*html element svg selector*/
 let svg = d3.select('svg');
-
+/*used variables defined above to give width and height attributes*/
 let drawCanvas =()=> {
     svg.attr('width', width);
     svg.attr('height', height);
@@ -100,7 +100,7 @@ req.open('GET', url, true);
 string into a javascript object.*/
 req.onload =()=>{
     data = JSON.parse(req.responseText);
-/*the data field from the object is where the values for our bar-chart are located*/
+/*the values for our bar-chart are located in data.data*/
     values = data.data;
     drawCanvas();
     generateScales();
